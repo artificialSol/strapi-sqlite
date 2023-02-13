@@ -1,0 +1,55 @@
+{
+  "kind": "collectionType",
+  "collectionName": "paids",
+  "info": {
+    "singularName": "paid",
+    "pluralName": "paids",
+    "displayName": "Paid",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "contact": {
+      "type": "string"
+    },
+    "amount": {
+      "type": "biginteger"
+    },
+    "accountType": {
+      "type": "string"
+    },
+    "accountNumber": {
+      "type": "string"
+    },
+    "paid": {
+      "type": "boolean"
+    },
+    "accountOwner": {
+      "type": "string"
+    },
+    "bank": {
+      "type": "string"
+    },
+    "bitcon": {
+      "type": "string"
+    },
+    "ethereum": {
+      "type": "string"
+    },
+    "dodgecoin": {
+      "type": "string"
+    },
+    "date": {
+      "type": "datetime"
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "paids"
+    }
+  }
+}
