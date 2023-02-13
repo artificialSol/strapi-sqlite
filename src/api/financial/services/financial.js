@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * financial service
+ * financial service.
  */
 
 const { createCoreService } = require('@strapi/strapi').factories;

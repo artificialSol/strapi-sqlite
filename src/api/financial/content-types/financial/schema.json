@@ -4,8 +4,7 @@
   "info": {
     "singularName": "financial",
     "pluralName": "financials",
-    "displayName": "financial",
-    "description": ""
+    "displayName": "financial"
   },
   "options": {
     "draftAndPublish": false
@@ -13,6 +12,12 @@
   "pluginOptions": {},
   "attributes": {
     "bitcon": {
+      "type": "string"
+    },
+    "accountNumber": {
+      "type": "string"
+    },
+    "bank": {
       "type": "string"
     },
     "ethereum": {
@@ -24,26 +29,19 @@
     "accountOwner": {
       "type": "string"
     },
-    "bank": {
-      "type": "string"
-    },
     "accountType": {
       "type": "string"
     },
-    "accountOwnerNumber": {
-      "type": "string"
+    "email": {
+      "type": "email"
     },
-    "accountNumber": {
+    "accountOwnerNumber": {
       "type": "string"
     },
     "users_permissions_user": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "financial"
-    },
-    "email": {
-      "type": "email"
+      "target": "plugin::users-permissions.user"
     }
   }
 }

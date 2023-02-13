@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * financial router
+ * financial router.
  */
 
 const { createCoreRouter } = require('@strapi/strapi').factories;
