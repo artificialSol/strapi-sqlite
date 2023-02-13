@@ -4,10 +4,11 @@
   "info": {
     "singularName": "referral",
     "pluralName": "referrals",
-    "displayName": "referral"
+    "displayName": "referral",
+    "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {

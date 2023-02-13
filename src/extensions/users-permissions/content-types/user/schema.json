@@ -86,6 +86,17 @@
       "relation": "oneToOne",
       "target": "api::referral-payment.referral-payment",
       "inversedBy": "users_permissions_user"
+    },
+    "approved": {
+      "type": "boolean",
+      "default": false
+    },
+    "referralEmail": {
+      "type": "email",
+      "required": true
+    },
+    "contact": {
+      "type": "string"
     }
   }
 }

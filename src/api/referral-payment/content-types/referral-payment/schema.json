@@ -48,7 +48,7 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user",
-      "inversedBy": "referral_payment"
+      "mappedBy": "referral_payment"
     }
   }
 }
