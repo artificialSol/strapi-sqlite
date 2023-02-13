@@ -1,0 +1,57 @@
+{
+  "kind": "collectionType",
+  "collectionName": "next_payments",
+  "info": {
+    "singularName": "next-payment",
+    "pluralName": "next-payments",
+    "displayName": "next-payment"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "contact": {
+      "type": "string",
+      "required": true
+    },
+    "amount": {
+      "type": "decimal",
+      "required": true
+    },
+    "accountType": {
+      "type": "string"
+    },
+    "accountNumber": {
+      "type": "string"
+    },
+    "accountOwner": {
+      "type": "string"
+    },
+    "paid": {
+      "type": "boolean",
+      "default": false
+    },
+    "bitcon": {
+      "type": "string"
+    },
+    "ethereum": {
+      "type": "string"
+    },
+    "dodgecoin": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "next_payments"
+    },
+    "date": {
+      "type": "datetime"
+    }
+  }
+}

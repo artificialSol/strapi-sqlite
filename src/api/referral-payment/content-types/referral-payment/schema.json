@@ -1,0 +1,54 @@
+{
+  "kind": "collectionType",
+  "collectionName": "referral_payments",
+  "info": {
+    "singularName": "referral-payment",
+    "pluralName": "referral-payments",
+    "displayName": "referral-payment"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "contact": {
+      "type": "string"
+    },
+    "accountType": {
+      "type": "string"
+    },
+    "accountOwner": {
+      "type": "string"
+    },
+    "accountNumber": {
+      "type": "string"
+    },
+    "bank": {
+      "type": "string"
+    },
+    "bitcon": {
+      "type": "string"
+    },
+    "ethereum": {
+      "type": "string"
+    },
+    "dodgecoin": {
+      "type": "string"
+    },
+    "amount": {
+      "type": "decimal"
+    },
+    "email": {
+      "type": "email"
+    },
+    "paid": {
+      "type": "boolean"
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "referral_payment"
+    }
+  }
+}

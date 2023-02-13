@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "personals",
+  "info": {
+    "singularName": "personal",
+    "pluralName": "personals",
+    "displayName": "personal"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "firstName": {
+      "type": "string",
+      "required": true
+    },
+    "surname": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "province": {
+      "type": "string"
+    },
+    "amount": {
+      "type": "decimal"
+    },
+    "postal": {
+      "type": "biginteger"
+    },
+    "address": {
+      "type": "string"
+    },
+    "gender": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "personal"
+    }
+  }
+}
