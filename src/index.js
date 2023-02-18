@@ -64,23 +64,25 @@ module.exports = {
           return result;
         }
         // If approved
-        console.log(personal.length, financial.length , result.approved)
+    //    console.log(personal.length, financial.length , result.approved)
         if (personal.length > 0 && financial.length > 0 && result.approved) {
           console.log("approved reached")
           const initialAmount = personal[0].amount;
-          const profit = initialAmount * 0.1;
-          let date = new Date();
-          let year = date.getFullYear();
-          let month = date.getMonth();
-          let day = date.getDate();
-
-          for (let i = 1; i < 13; i++) {
-            let newMonth = month + i;
+          const profit = initialAmount * 0.5;
+        
+          let startDate = new Date();
+          let year = startDate.getFullYear();
+          let month = startDate.getMonth();
+          let day = startDate.getDate();
+        
+          // Payment every two weeks (total 24 payments including initial investment + profit)
+          for (let i = 1; i <= 24; i++) {
+            let newMonth = month + 2 * i;
             if (newMonth > 11) {
-              newMonth = newMonth - 13;
+              newMonth = newMonth - 12;
               year++;
             }
-            const amount = i === 12 ? initialAmount + profit : profit;
+            const amount = i === 24 ? initialAmount + profit : profit;
             await strapi.db.query("api::next-payment.next-payment").create({
               data: {
                 contact: result.contact,
@@ -94,7 +96,7 @@ module.exports = {
                 date: new Date(year, newMonth, day).toISOString(),
                 amount: amount,
                 users_permissions_user: result.id,
-                email: result.email
+                email: result.email,
               },
             });
           }
@@ -112,7 +114,7 @@ console.log("concluded")
                 lastPercent: percent,
                 lastAdded: Math.trunc((percent / 100) * personal[0].amount),
                 users_permissions_user: result.id,
-                email: result.email
+               
               },
             });
           } else {
@@ -124,7 +126,7 @@ console.log("concluded")
                 lastPercent: 10,
                 lastAdded: Math.trunc((10 / 100) * personal[0].amount),
                 users_permissions_user: result.id,
-                email: result.email
+               
               },
             });
           }
