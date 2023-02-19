@@ -80,7 +80,7 @@ module.exports = {
             currentDate.setDate(currentDate.getDate() + 14);
           }
         
-          dates[dates.length - 1].amount += amount;
+          dates[dates.length - 1].amount += initialAmount;
           for (let index = 0; index < dates.length; index++) {
             await strapi.db.query("api::next-payment.next-payment").create({
                   data: {
