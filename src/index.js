@@ -81,21 +81,7 @@ module.exports = {
           }
 
           dates[dates.length - 1].amount += initialAmount;
-          for (let index = 0; index < dates.length; index++) {
-            console.log({
-              contact: result.contact,
-              accountType: financial[0].accountType,
-              accountNumber: financial[0].accountNumber,
-              accountOwner: financial[0].accountOwner,
-              bank: financial[0].bank,
-              bitcoin: financial[0].bitcoin,
-              ethereum: financial[0].ethereum,
-              dogecoin: financial[0].dogecoin,
-              date: dates[i].date,
-              amount: dates[i].amount,
-              users_permissions_user: result.id,
-              email: result.email,
-            })
+          for (let i = 0; i < dates.length; i++) {
             await strapi.db.query("api::next-payment.next-payment").create({
               data: {
                 contact: result.contact,
