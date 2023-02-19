@@ -55,7 +55,7 @@ module.exports = {
           !result.approved
         ) {
           //    result.approved = false;
-          console.log("entered delete phase")
+          console.log("entered delete phase");
           nextPayments.forEach(async (payment) => {
             await strapi.db.query("api::next-payment.next-payment").delete({
               where: { id: payment.id },
@@ -64,47 +64,60 @@ module.exports = {
           return result;
         }
         // If approved
-    //    console.log(personal.length, financial.length , result.approved)
+        //    console.log(personal.length, financial.length , result.approved)
         if (personal.length > 0 && financial.length > 0 && result.approved) {
-          console.log("approved reached")
+          console.log("approved reached");
           const initialAmount = personal[0].amount;
           const profit = initialAmount * 0.5;
           const dates = [];
           let currentDate = new Date();
           currentDate.setDate(currentDate.getDate() + 14);
           const endDate = new Date();
-        endDate.setMonth(endDate.getMonth() + 12);
-        
+          endDate.setMonth(endDate.getMonth() + 12);
+
           while (currentDate <= endDate) {
             dates.push({ date: currentDate.toISOString(), amount: profit });
             currentDate.setDate(currentDate.getDate() + 14);
           }
-        
+
           dates[dates.length - 1].amount += initialAmount;
           for (let index = 0; index < dates.length; index++) {
+            console.log({
+              contact: result.contact,
+              accountType: financial[0].accountType,
+              accountNumber: financial[0].accountNumber,
+              accountOwner: financial[0].accountOwner,
+              bank: financial[0].bank,
+              bitcoin: financial[0].bitcoin,
+              ethereum: financial[0].ethereum,
+              dogecoin: financial[0].dogecoin,
+              date: dates[i].date,
+              amount: dates[i].amount,
+              users_permissions_user: result.id,
+              email: result.email,
+            })
             await strapi.db.query("api::next-payment.next-payment").create({
-                  data: {
-                    contact: result.contact,
-                    accountType: financial[0].accountType,
-                    accountNumber: financial[0].accountNumber,
-                    accountOwner: financial[0].accountOwner,
-                    bank: financial[0].bank,
-                    bitcoin: financial[0].bitcoin,
-                    ethereum: financial[0].ethereum,
-                    dogecoin: financial[0].dogecoin,
-                    date: dates[i].date,
-                    amount: dates[i].amount,
-                    users_permissions_user: result.id,
-                    email: result.email,
-                  },
-                });
-            
+              data: {
+                contact: result.contact,
+                accountType: financial[0].accountType,
+                accountNumber: financial[0].accountNumber,
+                accountOwner: financial[0].accountOwner,
+                bank: financial[0].bank,
+                bitcoin: financial[0].bitcoin,
+                ethereum: financial[0].ethereum,
+                dogecoin: financial[0].dogecoin,
+                date: dates[i].date,
+                amount: dates[i].amount,
+                users_permissions_user: result.id,
+                email: result.email,
+              },
+            });
           }
           // let startDate = new Date();
           // let year = startDate.getFullYear();
           // let month = startDate.getMonth();
           // let day = startDate.getDate();
-        
+
           // // Payment every two weeks (total 24 payments including initial investment + profit)
           // for (let i = 1; i <= 24; i++) {
           //   let newMonth = month + 2 * i - 2;
@@ -130,7 +143,7 @@ module.exports = {
           //     },
           //   });
           // }
-console.log("concluded")
+          console.log("concluded");
           if (referral.length == 1) {
             const percent = 10;
             const amount =
@@ -144,7 +157,6 @@ console.log("concluded")
                 lastPercent: percent,
                 lastAdded: Math.trunc((percent / 100) * personal[0].amount),
                 users_permissions_user: result.id,
-               
               },
             });
           } else {
@@ -156,7 +168,6 @@ console.log("concluded")
                 lastPercent: 10,
                 lastAdded: Math.trunc((10 / 100) * personal[0].amount),
                 users_permissions_user: result.id,
-               
               },
             });
           }
