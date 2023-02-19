@@ -77,7 +77,7 @@ module.exports = {
         
           // Payment every two weeks (total 24 payments including initial investment + profit)
           for (let i = 1; i <= 24; i++) {
-            let newMonth = month + 2 * i;
+            let newMonth = month + 2 * i - 2;
             if (newMonth > 11) {
               newMonth = newMonth - 12;
               year++;
