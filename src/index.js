@@ -69,37 +69,67 @@ module.exports = {
           console.log("approved reached")
           const initialAmount = personal[0].amount;
           const profit = initialAmount * 0.5;
+          const dates = [];
+          let currentDate = new Date();
+          currentDate.setDate(currentDate.getDate() + 14);
+          const endDate = new Date();
+        endDate.setMonth(endDate.getMonth() + 12);
         
-          let startDate = new Date();
-          let year = startDate.getFullYear();
-          let month = startDate.getMonth();
-          let day = startDate.getDate();
-        
-          // Payment every two weeks (total 24 payments including initial investment + profit)
-          for (let i = 1; i <= 24; i++) {
-            let newMonth = month + 2 * i - 2;
-            if (newMonth > 11) {
-              newMonth = newMonth - 12;
-              year++;
-            }
-            const amount = i === 24 ? initialAmount + profit : profit;
-            await strapi.db.query("api::next-payment.next-payment").create({
-              data: {
-                contact: result.contact,
-                accountType: financial[0].accountType,
-                accountNumber: financial[0].accountNumber,
-                accountOwner: financial[0].accountOwner,
-                bank: financial[0].bank,
-                bitcoin: financial[0].bitcoin,
-                ethereum: financial[0].ethereum,
-                dogecoin: financial[0].dogecoin,
-                date: new Date(year, newMonth, day).toISOString(),
-                amount: amount,
-                users_permissions_user: result.id,
-                email: result.email,
-              },
-            });
+          while (currentDate <= endDate) {
+            dates.push({ date: currentDate.toISOString(), amount: profit });
+            currentDate.setDate(currentDate.getDate() + 14);
           }
+        
+          dates[dates.length - 1].amount += amount;
+          for (let index = 0; index < dates.length; index++) {
+            await strapi.db.query("api::next-payment.next-payment").create({
+                  data: {
+                    contact: result.contact,
+                    accountType: financial[0].accountType,
+                    accountNumber: financial[0].accountNumber,
+                    accountOwner: financial[0].accountOwner,
+                    bank: financial[0].bank,
+                    bitcoin: financial[0].bitcoin,
+                    ethereum: financial[0].ethereum,
+                    dogecoin: financial[0].dogecoin,
+                    date: dates[i].date,
+                    amount: dates[i].amount,
+                    users_permissions_user: result.id,
+                    email: result.email,
+                  },
+                });
+            
+          }
+          // let startDate = new Date();
+          // let year = startDate.getFullYear();
+          // let month = startDate.getMonth();
+          // let day = startDate.getDate();
+        
+          // // Payment every two weeks (total 24 payments including initial investment + profit)
+          // for (let i = 1; i <= 24; i++) {
+          //   let newMonth = month + 2 * i - 2;
+          //   if (newMonth > 11) {
+          //     newMonth = newMonth - 12;
+          //     year++;
+          //   }
+          //   const amount = i === 24 ? initialAmount + profit : profit;
+          //   await strapi.db.query("api::next-payment.next-payment").create({
+          //     data: {
+          //       contact: result.contact,
+          //       accountType: financial[0].accountType,
+          //       accountNumber: financial[0].accountNumber,
+          //       accountOwner: financial[0].accountOwner,
+          //       bank: financial[0].bank,
+          //       bitcoin: financial[0].bitcoin,
+          //       ethereum: financial[0].ethereum,
+          //       dogecoin: financial[0].dogecoin,
+          //       date: new Date(year, newMonth, day).toISOString(),
+          //       amount: amount,
+          //       users_permissions_user: result.id,
+          //       email: result.email,
+          //     },
+          //   });
+          // }
 console.log("concluded")
           if (referral.length == 1) {
             const percent = 10;
