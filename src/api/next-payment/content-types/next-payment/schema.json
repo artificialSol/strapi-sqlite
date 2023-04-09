@@ -4,7 +4,8 @@
   "info": {
     "singularName": "next-payment",
     "pluralName": "next-payments",
-    "displayName": "next-payment"
+    "displayName": "next-payment",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -52,6 +53,10 @@
     },
     "date": {
       "type": "datetime"
+    },
+    "reinvest": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

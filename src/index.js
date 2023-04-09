@@ -55,7 +55,7 @@ module.exports = {
           !result.approved
         ) {
           //    result.approved = false;
-          console.log("entered delete phase");
+          //console.log("entered delete phase");
           nextPayments.forEach(async (payment) => {
             await strapi.db.query("api::next-payment.next-payment").delete({
               where: { id: payment.id },
@@ -71,13 +71,13 @@ module.exports = {
           const profit = initialAmount * 0.5;
           const dates = [];
           let currentDate = new Date();
-          currentDate.setDate(currentDate.getDate() + 14);
+          currentDate.setDate(currentDate.getDate() + 30);
           const endDate = new Date();
           endDate.setMonth(endDate.getMonth() + 12);
 
           while (currentDate <= endDate) {
             dates.push({ date: currentDate.toISOString(), amount: profit });
-            currentDate.setDate(currentDate.getDate() + 14);
+            currentDate.setDate(currentDate.getDate() + 30);
           }
 
           dates[dates.length - 1].amount += initialAmount;
@@ -99,37 +99,7 @@ module.exports = {
               },
             });
           }
-          // let startDate = new Date();
-          // let year = startDate.getFullYear();
-          // let month = startDate.getMonth();
-          // let day = startDate.getDate();
-
-          // // Payment every two weeks (total 24 payments including initial investment + profit)
-          // for (let i = 1; i <= 24; i++) {
-          //   let newMonth = month + 2 * i - 2;
-          //   if (newMonth > 11) {
-          //     newMonth = newMonth - 12;
-          //     year++;
-          //   }
-          //   const amount = i === 24 ? initialAmount + profit : profit;
-          //   await strapi.db.query("api::next-payment.next-payment").create({
-          //     data: {
-          //       contact: result.contact,
-          //       accountType: financial[0].accountType,
-          //       accountNumber: financial[0].accountNumber,
-          //       accountOwner: financial[0].accountOwner,
-          //       bank: financial[0].bank,
-          //       bitcoin: financial[0].bitcoin,
-          //       ethereum: financial[0].ethereum,
-          //       dogecoin: financial[0].dogecoin,
-          //       date: new Date(year, newMonth, day).toISOString(),
-          //       amount: amount,
-          //       users_permissions_user: result.id,
-          //       email: result.email,
-          //     },
-          //   });
-          // }
-          console.log("concluded");
+         
           if (referral.length == 1) {
             const percent = 10;
             const amount =
