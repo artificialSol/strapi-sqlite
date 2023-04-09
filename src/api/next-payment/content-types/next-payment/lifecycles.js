@@ -58,7 +58,7 @@ module.exports = {
         currentDate.setDate(currentDate.getDate() + 30);
       }
 
-      dates[dates.length - 1].amount += initialAmount;
+      dates[dates.length - 1].amount = initialAmount;
      // console.log(result)
       for (let i = 1; i < dates.length; i++) {
         await strapi.db.query("api::next-payment.next-payment").create({
